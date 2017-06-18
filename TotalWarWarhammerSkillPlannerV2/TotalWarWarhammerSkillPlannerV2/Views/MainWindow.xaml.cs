@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TotalWarWarhammerSkillPlannerV2
+namespace TotalWarWarhammerSkillPlannerV2.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
