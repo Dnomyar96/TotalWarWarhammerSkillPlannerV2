@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TotalWarWarhammerSkillPlannerV2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="720" Width="1280">
     <Grid>
-        
+        <Button x:Name="skillsBtn" Content="Skills" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="skillsBtn_Click"/>
+        <Button x:Name="nodesBtn" Content="Nodes" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" Click="nodesBtn_Click"/>
+        <DataGrid x:Name="gridBox" HorizontalAlignment="Left" Height="644" Margin="10,35,0,0" VerticalAlignment="Top" Width="1252"/>
+        <Button x:Name="Links" Content="Links" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="75" Click="Links_Click"/>
+        <Button x:Name="levelDetails" Content="Level Details" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" Width="75" Click="levelDetails_Click"/>
+        <Button x:Name="levelToEffect" Content="Level To Effect" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" Width="82" Click="levelToEffect_Click"/>
+        <Button x:Name="nodeSets" Content="Node Sets" HorizontalAlignment="Left" Margin="417,10,0,0" VerticalAlignment="Top" Width="75" Click="nodeSets_Click"/>
+        <Button x:Name="agentSubtypes" Content="Agent Subtypes" HorizontalAlignment="Left" Margin="497,10,0,0" VerticalAlignment="Top" Width="92" Click="agentSubtypes_Click"/>
+
     </Grid>
 </Window>
