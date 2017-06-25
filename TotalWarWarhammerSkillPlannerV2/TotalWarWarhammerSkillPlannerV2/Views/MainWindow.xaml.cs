@@ -14,7 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Serialization;
-using TotalWarWarhammerSkillPlannerV2.Data.Models;
+using TotalWarWarhammerSkillPlannerV2.Data;
+using TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization;
 
 namespace TotalWarWarhammerSkillPlannerV2.Views
 {
@@ -26,77 +27,47 @@ namespace TotalWarWarhammerSkillPlannerV2.Views
         public MainWindow()
         {
             InitializeComponent();
+            DataHandler.SetBasePath(@"E:\Steam\steamapps\common\Total War WARHAMMER\assembly_kit\raw_data\db\");
         }
 
         private void skillsBtn_Click(object sender, RoutedEventArgs e)
         {
-            var serialzer = new XmlSerializer(typeof(SkillCollection));
-
-            using (var fs = new FileStream(@"E:\Steam\steamapps\common\Total War WARHAMMER\assembly_kit\raw_data\db\character_skills.xml", FileMode.Open))
-            {
-                var skills = (SkillCollection)serialzer.Deserialize(fs);
-                gridBox.ItemsSource = skills.Skills;
-            }
+            gridBox.ItemsSource = DataHandler.GetSkills();
         }
 
         private void nodesBtn_Click(object sender, RoutedEventArgs e)
         {
-            var serialzer = new XmlSerializer(typeof(SkillNodesCollection));
-
-            using (var fs = new FileStream(@"E:\Steam\steamapps\common\Total War WARHAMMER\assembly_kit\raw_data\db\character_skill_nodes.xml", FileMode.Open))
-            {
-                var skills = (SkillNodesCollection)serialzer.Deserialize(fs);
-                gridBox.ItemsSource = skills.SkillNodes;
-            }
+            gridBox.ItemsSource = DataHandler.GetSkillNodes();
         }
 
         private void Links_Click(object sender, RoutedEventArgs e)
         {
-            var serialzer = new XmlSerializer(typeof(SkillNodeLinksCollection));
-
-            using (var fs = new FileStream(@"E:\Steam\steamapps\common\Total War WARHAMMER\assembly_kit\raw_data\db\character_skill_node_links.xml", FileMode.Open))
-            {
-                var skills = (SkillNodeLinksCollection)serialzer.Deserialize(fs);
-                gridBox.ItemsSource = skills.SkillNodeLinks;
-            }
+            gridBox.ItemsSource = DataHandler.GetSkillNodeLinks();
         }
 
         private void levelDetails_Click(object sender, RoutedEventArgs e)
         {
-            var serialzer = new XmlSerializer(typeof(SkillLevelDetailsCollection));
-
-            using (var fs = new FileStream(@"E:\Steam\steamapps\common\Total War WARHAMMER\assembly_kit\raw_data\db\character_skill_level_details.xml", FileMode.Open))
-            {
-                var skills = (SkillLevelDetailsCollection)serialzer.Deserialize(fs);
-                gridBox.ItemsSource = skills.SkillLevelDetails;
-            }
+            gridBox.ItemsSource = DataHandler.GetSkillLevelDetails();
         }
 
         private void levelToEffect_Click(object sender, RoutedEventArgs e)
         {
-            var serialzer = new XmlSerializer(typeof(SkillLevelToEffectsCollection));
-
-            using (var fs = new FileStream(@"E:\Steam\steamapps\common\Total War WARHAMMER\assembly_kit\raw_data\db\character_skill_level_to_effects_junctions.xml", FileMode.Open))
-            {
-                var skills = (SkillLevelToEffectsCollection)serialzer.Deserialize(fs);
-                gridBox.ItemsSource = skills.SkillLevelToEffects;
-            }
+            gridBox.ItemsSource = DataHandler.GetSkillLevelToEffects();
         }
 
         private void nodeSets_Click(object sender, RoutedEventArgs e)
         {
-            var serialzer = new XmlSerializer(typeof(SkillNodeSetsCollection));
-
-            using (var fs = new FileStream(@"E:\Steam\steamapps\common\Total War WARHAMMER\assembly_kit\raw_data\db\character_skill_node_sets.xml", FileMode.Open))
-            {
-                var skills = (SkillNodeSetsCollection)serialzer.Deserialize(fs);
-                gridBox.ItemsSource = skills.SkillNodeSets;
-            }
+            gridBox.ItemsSource = DataHandler.GetSkillNodeSets();
         }
 
         private void agentSubtypes_Click(object sender, RoutedEventArgs e)
         {
-            gridBox.ItemsSource = skills.AgentSubTypes;
+            gridBox.ItemsSource = DataHandler.GetAgentSubTypes();
+        }
+
+        private void effectsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            gridBox.ItemsSource = DataHandler.GetEffects();
         }
     }
 }

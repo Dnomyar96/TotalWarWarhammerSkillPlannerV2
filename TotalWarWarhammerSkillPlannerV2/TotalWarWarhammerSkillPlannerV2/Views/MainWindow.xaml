@@ -15,6 +15,7 @@
         <Button x:Name="levelToEffect" Content="Level To Effect" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" Width="82" Click="levelToEffect_Click"/>
         <Button x:Name="nodeSets" Content="Node Sets" HorizontalAlignment="Left" Margin="417,10,0,0" VerticalAlignment="Top" Width="75" Click="nodeSets_Click"/>
         <Button x:Name="agentSubtypes" Content="Agent Subtypes" HorizontalAlignment="Left" Margin="497,10,0,0" VerticalAlignment="Top" Width="92" Click="agentSubtypes_Click"/>
+        <Button x:Name="effectsBtn" Content="Effects" HorizontalAlignment="Left" Margin="594,10,0,0" VerticalAlignment="Top" Width="75" Click="effectsBtn_Click"/>
 
     </Grid>
 </Window>

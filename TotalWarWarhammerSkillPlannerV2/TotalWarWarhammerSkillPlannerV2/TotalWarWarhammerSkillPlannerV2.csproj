@@ -63,20 +63,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\DataHandler.cs" />
-    <Compile Include="Data\Models\AgentSubType.cs" />
-    <Compile Include="Data\Models\AgentSubTypesCollection.cs" />
+    <Compile Include="Data\Models\AgentSubtype.cs" />
+    <Compile Include="Data\Models\Effect.cs" />
+    <Compile Include="Data\Models\LevelDetail.cs" />
+    <Compile Include="Data\Models\LevelToEffect.cs" />
+    <Compile Include="Data\Models\NodeSet.cs" />
+    <Compile Include="Data\Models\Node.cs" />
+    <Compile Include="Data\Models\NodeLink.cs" />
+    <Compile Include="Data\Models\Serialization\AgentSubType.cs" />
+    <Compile Include="Data\Models\Serialization\AgentSubTypesCollection.cs" />
+    <Compile Include="Data\Models\Serialization\Effects.cs" />
+    <Compile Include="Data\Models\Serialization\EffectsCollection.cs" />
+    <Compile Include="Data\Models\Serialization\Skill.cs" />
+    <Compile Include="Data\Models\Serialization\SkillLevelDetails.cs" />
+    <Compile Include="Data\Models\Serialization\SkillLevelDetailsCollection.cs" />
+    <Compile Include="Data\Models\Serialization\SkillLevelToEffects.cs" />
+    <Compile Include="Data\Models\Serialization\SkillLevelToEffectsCollection.cs" />
+    <Compile Include="Data\Models\Serialization\SkillNode.cs" />
+    <Compile Include="Data\Models\Serialization\SkillNodeLink.cs" />
+    <Compile Include="Data\Models\Serialization\SkillNodeLinksCollection.cs" />
+    <Compile Include="Data\Models\Serialization\SkillNodesCollection.cs" />
+    <Compile Include="Data\Models\Serialization\SkillCollection.cs" />
+    <Compile Include="Data\Models\Serialization\SkillNodeSet.cs" />
+    <Compile Include="Data\Models\Serialization\SkillNodeSetsCollection.cs" />
     <Compile Include="Data\Models\Skill.cs" />
-    <Compile Include="Data\Models\SkillLevelDetails.cs" />
-    <Compile Include="Data\Models\SkillLevelDetailsCollection.cs" />
-    <Compile Include="Data\Models\SkillLevelToEffects.cs" />
-    <Compile Include="Data\Models\SkillLevelToEffectsCollection.cs" />
-    <Compile Include="Data\Models\SkillNode.cs" />
-    <Compile Include="Data\Models\SkillNodeLink.cs" />
-    <Compile Include="Data\Models\SkillNodeLinksCollection.cs" />
-    <Compile Include="Data\Models\SkillNodesCollection.cs" />
-    <Compile Include="Data\Models\SkillCollection.cs" />
-    <Compile Include="Data\Models\SkillNodeSet.cs" />
-    <Compile Include="Data\Models\SkillNodeSetsCollection.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

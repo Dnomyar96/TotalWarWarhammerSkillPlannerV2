@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace TotalWarWarhammerSkillPlannerV2.Data.Models
+namespace TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization
 {
     public class SkillLevelDetails
     {

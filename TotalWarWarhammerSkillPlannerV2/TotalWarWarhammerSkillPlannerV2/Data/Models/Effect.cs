@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace TotalWarWarhammerSkillPlannerV2.Data.Models
 {
-    public class Skill
+    public class Effect
     {
         public string Key { get; set; }
-        
-        public string Name { get; set; }
-        
-        public int UnlockedAtRank { get; set; }
+
+        public string Category { get; set; }
         
         public string Description { get; set; }
         
-        public string ImagePath { get; set; }
+        public bool IsPositiveValueGood { get; set; }
+        
+        public int Priority { get; set; }
 
-        public List<LevelToEffect> LevelsToEffects { get; set; }
+        public string Icon { get; set; }
 
-        public LevelDetail LevelDetail { get; set; }
+        public string IconNegative { get; set; }
     }
 }
