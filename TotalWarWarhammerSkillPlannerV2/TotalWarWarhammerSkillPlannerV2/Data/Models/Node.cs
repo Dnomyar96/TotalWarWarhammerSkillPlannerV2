@@ -12,7 +12,7 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models
         
         public string CharacterSkillKey { get; set; }
         
-        public string CharcterSkillNodeSetKey { get; set; }
+        public string CharacterSkillNodeSetKey { get; set; }
         
         public int Indent { get; set; }
         
@@ -21,7 +21,7 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models
         public bool VisibleInUi { get; set; }
 
         //TODO: figure out how to implement this
-        public List<NodeLink> NodeLinks { get; set; }
+        public IEnumerable<NodeLink> NodeLinks { get; set; }
 
         public Skill Skill { get; set; }
     }

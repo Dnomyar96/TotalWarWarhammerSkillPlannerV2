@@ -18,7 +18,7 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models
         
         public string ImagePath { get; set; }
 
-        public List<LevelToEffect> LevelsToEffects { get; set; }
+        public IEnumerable<LevelToEffect> LevelsToEffects { get; set; }
 
         public LevelDetail LevelDetail { get; set; }
     }

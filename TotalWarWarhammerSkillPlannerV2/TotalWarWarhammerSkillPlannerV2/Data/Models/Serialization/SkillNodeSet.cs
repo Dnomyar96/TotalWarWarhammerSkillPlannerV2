@@ -16,7 +16,7 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization
         public string AgentKey { get; set; }
 
         [XmlElement("agent_subtype_key")]
-        public string AgentSubypeKey { get; set; }
+        public string AgentSubtypeKey { get; set; }
 
         [XmlElement("enc_title")]
         public string EncTitle { get; set; }

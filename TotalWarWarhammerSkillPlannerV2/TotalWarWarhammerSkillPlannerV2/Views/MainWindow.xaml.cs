@@ -69,5 +69,10 @@ namespace TotalWarWarhammerSkillPlannerV2.Views
         {
             gridBox.ItemsSource = DataHandler.GetEffects();
         }
+
+        private void objectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            gridBox.ItemsSource = DataHandler.CreateDataObjects();
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization
         public string CharacterSkillKey { get; set; }
 
         [XmlElement("character_skill_node_set_key")]
-        public string CharcterSkillNodeSetKey { get; set; }
+        public string CharacterSkillNodeSetKey { get; set; }
 
         [XmlElement("indent")]
         public int Indent { get; set; }

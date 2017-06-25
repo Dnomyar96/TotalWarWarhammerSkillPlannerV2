@@ -9,9 +9,15 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization
 {
     public class SkillNodeLink
     {
+        /// <summary>
+        /// Current skill
+        /// </summary>
         [XmlElement("child_key")]
         public string ChildKey { get; set; }
 
+        /// <summary>
+        /// Required skill
+        /// </summary>
         [XmlElement("parent_key")]
         public string ParentKey { get; set; }
         

@@ -12,10 +12,10 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models
         
         public string AgentKey { get; set; }
         
-        public string AgentSubypeKey { get; set; }
+        public string AgentSubtypeKey { get; set; }
         
         public string EncTitle { get; set; }
 
-        public List<Node> Nodes { get; set; }
+        public IEnumerable<Node> Nodes { get; set; }
     }
 }
