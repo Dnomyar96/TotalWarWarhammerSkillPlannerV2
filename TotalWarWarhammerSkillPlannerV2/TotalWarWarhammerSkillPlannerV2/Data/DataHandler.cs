@@ -70,94 +70,169 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             }
         }
 
+        private static AgentSubtype CreateAgentSubType(this AgentSubType agent)
+        {
+            var data = new AgentSubtype
+            {
+                AssociatedUnitOverride = agent.AssociatedUnitOverride,
+                AutoGenerate = agent.AutoGenerate,
+                DescriptionTextOverride = agent.DescriptionTextOverride,
+                HasFemaleName = agent.HasFemaleName,
+                IsCaster = agent.IsCaster,
+                Key = agent.Key,
+                OnscreenNameOverride = agent.OnscreenNameOverride,
+                ShowInUi = agent.ShowInUi,
+                SmallIcon = agent.SmallIcon,
+                NodeSet = DataObjects.NodeSets.Where(ns => ns.AgentSubtypeKey == agent.Key).Select(ns => ns.CreateNodeSet()).FirstOrDefault()
+            };
+
+            return data;
+        }
+
+        private static Effect CreateEffect(this Effects effect)
+        {
+            var data = new Effect
+            {
+                Category = effect.Category,
+                Description = effect.Description,
+                Icon = effect.Icon,
+                IconNegative = effect.IconNegative,
+                IsPositiveValueGood = effect.IsPositiveValueGood,
+                Key = effect.Effect,
+                Priority = effect.Priority
+            };
+
+            return data;
+        }
+
+        private static Models.Skill CreateSkill(this Models.Serialization.Skill skill)
+        {
+            var data = new Models.Skill
+            {
+                Description = skill.Description,
+                ImagePath = skill.ImagePath,
+                Key = skill.Key,
+                Name = skill.Name,
+                UnlockedAtRank = skill.UnlockedAtRank,
+                LevelDetail = DataObjects.LevelDetails.Where(l => l.SkillKey == skill.Key).Select(l => l.CreateLevelDetail()).FirstOrDefault(),
+                LevelsToEffects = DataObjects.LevelToEffects.Where(l => l.SkillKey == skill.Key).Select(l => l.CreateLevelToEffect())
+            };
+
+            return data;
+        }
+
+        private static LevelDetail CreateLevelDetail(this SkillLevelDetails levelDetail)
+        {
+            var data = new LevelDetail
+            {
+                Description = levelDetail.Description,
+                Name = levelDetail.Name,
+                SkillKey = levelDetail.SkillKey,
+                UnlockedAtRank = levelDetail.UnlockedAtRank
+            };
+
+            return data;
+        }
+
+        private static LevelToEffect CreateLevelToEffect(this SkillLevelToEffects levelToEffect)
+        {
+            var data = new LevelToEffect
+            {
+                EffectKey = levelToEffect.EffectKey,
+                EffectScope = levelToEffect.EffectScope,
+                IsFactionwide = levelToEffect.IsFactionwide,
+                Level = levelToEffect.Level,
+                SkillKey = levelToEffect.SkillKey,
+                Value = levelToEffect.Value,
+                Effect = DataObjects.Effects.Where(e => e.Effect == levelToEffect.EffectKey).Select(e => e.CreateEffect()).FirstOrDefault()
+            };
+
+            return data;
+        }
+
+        private static Node CreateNode(this SkillNode node)
+        {
+            var data = new Node
+            {
+                CharacterSkillKey = node.CharacterSkillKey,
+                CharacterSkillNodeSetKey = node.CharacterSkillNodeSetKey,
+                Indent = node.Indent,
+                Key = node.Key,
+                Tier = node.Tier,
+                VisibleInUi = node.VisibleInUi,
+                NodeLinks = DataObjects.NodeLinks.Where(nl => nl.ChildKey == node.Key).Select(nl => nl.CreateNodeLink()),
+                Skill = DataObjects.Skills.Where(s => s.Key == node.CharacterSkillKey).Select(s => s.CreateSkill()).FirstOrDefault()
+            };
+
+            return data;
+        }
+
+        private static NodeLink CreateNodeLink(this SkillNodeLink nodeLink)
+        {
+            var data = new NodeLink
+            {
+                ChildKey = nodeLink.ChildKey,
+                LinkType = nodeLink.LinkType,
+                ParentKey = nodeLink.ParentKey
+            };
+
+            return data;
+        }
+
+        private static NodeSet CreateNodeSet(this SkillNodeSet nodeSet)
+        {
+            var data = new NodeSet
+            {
+                AgentKey = nodeSet.AgentKey,
+                AgentSubtypeKey = nodeSet.AgentSubtypeKey,
+                EncTitle = nodeSet.EncTitle,
+                Key = nodeSet.Key,
+                Nodes = DataObjects.Nodes.Where(n => n.CharacterSkillNodeSetKey == nodeSet.Key).Select(n => n.CreateNode())
+            };
+
+            return data;
+        }
+
         public static List<AgentSubtype> CreateDataObjects()
         {
-            var agents = GetAgentSubTypes();
-            var effects = GetEffects();
-            var skills = GetSkills();
-            var levelDetails = GetSkillLevelDetails();
-            var levelToEffects = GetSkillLevelToEffects();
-            var nodes = GetSkillNodes();
-            var nodeLinks = GetSkillNodeLinks();
-            var nodeSets = GetSkillNodeSets();
+            DataObjects.Agents = GetAgentSubTypes();
+            DataObjects.Effects = GetEffects();
+            DataObjects.Skills = GetSkills();
+            DataObjects.LevelDetails = GetSkillLevelDetails();
+            DataObjects.LevelToEffects = GetSkillLevelToEffects();
+            DataObjects.Nodes = GetSkillNodes();
+            DataObjects.NodeLinks = GetSkillNodeLinks();
+            DataObjects.NodeSets = GetSkillNodeSets();
 
             var data = new List<AgentSubtype>();
 
-            foreach(var agent in agents)
+            foreach (var agent in DataObjects.Agents)
             {
-                var newAgent = new AgentSubtype
-                {
-                    AssociatedUnitOverride = agent.AssociatedUnitOverride,
-                    AutoGenerate = agent.AutoGenerate,
-                    DescriptionTextOverride = agent.DescriptionTextOverride,
-                    HasFemaleName = agent.HasFemaleName,
-                    IsCaster = agent.IsCaster,
-                    Key = agent.Key,
-                    OnscreenNameOverride = agent.OnscreenNameOverride,
-                    ShowInUi = agent.ShowInUi,
-                    SmallIcon = agent.SmallIcon,
-                    NodeSet = nodeSets.Where(ns => ns.AgentSubtypeKey == agent.Key).Select(ns => new NodeSet
-                    {
-                        AgentKey = ns.AgentKey,
-                        AgentSubtypeKey = ns.AgentSubtypeKey,
-                        EncTitle = ns.EncTitle,
-                        Key = ns.Key,
-                        Nodes = nodes.Where(n => n.CharacterSkillNodeSetKey == ns.Key).Select(n => new Node
-                        {
-                            CharacterSkillKey = n.CharacterSkillKey,
-                            CharacterSkillNodeSetKey = n.CharacterSkillNodeSetKey,
-                            Indent = n.Indent,
-                            Key = n.Key,
-                            Tier = n.Tier,
-                            VisibleInUi = n.VisibleInUi,
-                            NodeLinks = nodeLinks.Where(nl => nl.ChildKey == n.Key).Select(nl => new NodeLink
-                            {
-                                ChildKey = nl.ChildKey,
-                                LinkType = nl.LinkType,
-                                ParentKey = nl.ParentKey
-                            }),
-                            Skill = skills.Where(s => s.Key == n.CharacterSkillKey).Select(s => new Models.Skill
-                            {
-                                Description = s.Description,
-                                ImagePath = s.ImagePath,
-                                Key = s.Key,
-                                Name = s.Name,
-                                UnlockedAtRank = s.UnlockedAtRank,
-                                LevelDetail = levelDetails.Where(l => l.SkillKey == s.Key).Select(l => new LevelDetail
-                                {
-                                    Description = l.Description,
-                                    Name = l.Name,
-                                    SkillKey = l.SkillKey,
-                                    UnlockedAtRank = l.UnlockedAtRank
-                                }).FirstOrDefault(),
-                                LevelsToEffects = levelToEffects.Where(l => l.SkillKey == s.Key).Select(l => new LevelToEffect
-                                {
-                                    EffectKey = l.EffectKey,
-                                    EffectScope = l.EffectScope,
-                                    IsFactionwide = l.IsFactionwide,
-                                    Level = l.Level,
-                                    SkillKey = l.SkillKey,
-                                    Value = l.Value,
-                                    Effect = effects.Where(e => e.Effect == l.EffectKey).Select(e => new Effect
-                                    {
-                                        Category = e.Category,
-                                        Description = e.Description,
-                                        Icon = e.Icon,
-                                        IconNegative = e.IconNegative,
-                                        IsPositiveValueGood = e.IsPositiveValueGood,
-                                        Key = e.Effect,
-                                        Priority = e.Priority
-                                    }).FirstOrDefault()
-                                })
-                            }).FirstOrDefault()
-                        })
-                    }).FirstOrDefault()
-                };
+                var newAgent = agent.CreateAgentSubType();
 
                 data.Add(newAgent);
             }
 
             return data;
+        }
+
+        private static class DataObjects
+        {
+            public static List<AgentSubType> Agents { get; set; }
+
+            public static List<Effects> Effects { get; set; }
+
+            public static List<Models.Serialization.Skill> Skills { get; set; }
+
+            public static List<SkillLevelDetails> LevelDetails { get; set; }
+
+            public static List<SkillLevelToEffects> LevelToEffects { get; set; }
+
+            public static List<SkillNode> Nodes { get; set; }
+
+            public static List<SkillNodeLink> NodeLinks { get; set; }
+
+            public static List<SkillNodeSet> NodeSets { get; set; }
         }
     }
 }
