@@ -93,7 +93,7 @@ namespace TotalWarWarhammerSkillPlannerV2.Views
             gridBox.ItemsSource = data;
             foreach(var item in data)
             {
-                console.WriteLine("Factions: " + item.Factions.Count());
+                console.WriteLine("Factions: " + item.Factions.Count() + "\n Agent: " + item.OnscreenNameOverride);
                 foreach(var faction in item.Factions)
                 {
                     console.WriteLine("\t" + faction.Name);

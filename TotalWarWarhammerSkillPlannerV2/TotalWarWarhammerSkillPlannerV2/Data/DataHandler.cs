@@ -69,6 +69,16 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             return GetData<Models.Serialization.Faction, FactionCollection>("factions.xml");
         }
 
+        public static List<FactionToFactionGroups> GetFactionToFactionGroups()
+        {
+            return GetData<FactionToFactionGroups, FactionToFactionGroupsCollection>("faction_to_faction_groups_junctions.xml");
+        }
+
+        public static List<FactionGroups> GetFactionGroups()
+        {
+            return GetData<FactionGroups, FactionGroupsCollection>("faction_groups.xml");
+        }
+
         private static List<T> GetData<T, C>(string f)
         {
             var serializer = new XmlSerializer(typeof(C));
@@ -208,10 +218,17 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
 
         private static Models.Faction CreateFaction(this Models.Serialization.Faction faction)
         {
+            var groupKey = DataObjects.FactionToFactionGroups.Where(fg => fg.FactionKey == faction.Key).FirstOrDefault();
+            var group = "";
+
+            if (groupKey != null)
+                group = DataObjects.FactionGroups.Where(fg => fg.Key == groupKey.FactionGroupKey).FirstOrDefault().Name;
+
             var data = new Models.Faction
             {
                 Key = faction.Key,
-                Name = faction.Name
+                Name = faction.Name,
+                Group = group
             };
 
             return data;
@@ -229,6 +246,8 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             DataObjects.NodeSets = GetSkillNodeSets();
             DataObjects.PermittedSubtypes = GetFactionAgentPermittedSubTypes();
             DataObjects.Factions = GetFactions();
+            DataObjects.FactionToFactionGroups = GetFactionToFactionGroups();
+            DataObjects.FactionGroups = GetFactionGroups();
 
             var data = new List<AgentSubtype>();
 
@@ -263,6 +282,10 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             public static List<FactionAgentPermittedSubtypes> PermittedSubtypes { get; set; }
 
             public static List<Models.Serialization.Faction> Factions { get; set; }
+
+            public static List<FactionToFactionGroups> FactionToFactionGroups { get; set; }
+
+            public static List<FactionGroups> FactionGroups { get; set; }
         }
     }
 }

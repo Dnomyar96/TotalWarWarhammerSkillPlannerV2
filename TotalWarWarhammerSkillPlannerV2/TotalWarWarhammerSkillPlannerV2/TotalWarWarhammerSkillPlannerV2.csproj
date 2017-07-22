@@ -83,6 +83,10 @@
     <Compile Include="Data\Models\Serialization\FactionAgentPermittedSubTypeCollection.cs" />
     <Compile Include="Data\Models\Serialization\FactionAgentPermittedSubtypes.cs" />
     <Compile Include="Data\Models\Serialization\FactionCollection.cs" />
+    <Compile Include="Data\Models\Serialization\FactionGroups.cs" />
+    <Compile Include="Data\Models\Serialization\FactionGroupsCollection.cs" />
+    <Compile Include="Data\Models\Serialization\FactionToFactionGroups.cs" />
+    <Compile Include="Data\Models\Serialization\FactionToFactionGroupsCollection.cs" />
     <Compile Include="Data\Models\Serialization\Skill.cs" />
     <Compile Include="Data\Models\Serialization\SkillLevelDetails.cs" />
     <Compile Include="Data\Models\Serialization\SkillLevelDetailsCollection.cs" />

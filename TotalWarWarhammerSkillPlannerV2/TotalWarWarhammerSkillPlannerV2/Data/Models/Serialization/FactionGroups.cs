@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace TotalWarWarhammerSkillPlannerV2.Data.Models
+namespace TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization
 {
-    public class Faction
+    public class FactionGroups
     {
+        [XmlElement("key")]
         public string Key { get; set; }
 
+        [XmlElement("name_localised")]
         public string Name { get; set; }
-
-        public string Group { get; set; }
     }
 }
