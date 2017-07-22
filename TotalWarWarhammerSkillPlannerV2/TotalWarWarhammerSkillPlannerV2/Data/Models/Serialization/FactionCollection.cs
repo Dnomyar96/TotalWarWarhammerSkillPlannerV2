@@ -11,6 +11,6 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization
     public class FactionCollection
     {
         [XmlElement("factions")]
-        public List<SkillNodeSet> Collection { get; set; }
+        public List<Faction> Collection { get; set; }
     }
 }

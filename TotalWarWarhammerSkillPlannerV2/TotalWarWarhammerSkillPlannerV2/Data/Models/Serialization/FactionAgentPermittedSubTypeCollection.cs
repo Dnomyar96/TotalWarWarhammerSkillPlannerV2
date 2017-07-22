@@ -11,6 +11,6 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models.Serialization
     public class FactionAgentPermittedSubTypeCollection
     {
         [XmlElement("faction_agent_permitted_subtypes")]
-        public List<SkillNodeSet> Collection { get; set; }
+        public List<FactionAgentPermittedSubtypes> Collection { get; set; }
     }
 }

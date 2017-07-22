@@ -91,6 +91,14 @@ namespace TotalWarWarhammerSkillPlannerV2.Views
             console.Log("Object button clicked");
             var data = DataHandler.CreateDataObjects();
             gridBox.ItemsSource = data;
+            foreach(var item in data)
+            {
+                console.WriteLine("Factions: " + item.Factions.Count());
+                foreach(var faction in item.Factions)
+                {
+                    console.WriteLine("\t" + faction.Name);
+                }
+            }
         }
     }
 }
