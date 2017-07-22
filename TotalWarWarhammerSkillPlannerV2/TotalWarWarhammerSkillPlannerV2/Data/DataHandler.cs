@@ -59,6 +59,16 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             return GetData<Effects, EffectsCollection>("effects.xml");
         }
 
+        public static List<FactionAgentPermittedSubtypes> GetFactionAgentPermittedSubTypes()
+        {
+            return GetData<FactionAgentPermittedSubtypes, FactionAgentPermittedSubTypeCollection>("faction_agent_permitted_subtypes.xml");
+        }
+
+        public static List<Models.Serialization.Faction> GetFactions()
+        {
+            return GetData<Models.Serialization.Faction, FactionCollection>("factions.xml");
+        }
+
         private static List<T> GetData<T, C>(string f)
         {
             var serializer = new XmlSerializer(typeof(C));
@@ -72,6 +82,8 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
 
         private static AgentSubtype CreateAgentSubType(this AgentSubType agent)
         {
+            var factionKeys = DataObjects.PermittedSubtypes.Where(ps => ps.AgentSubType == agent.Key).Select(ps => ps.Faction);
+
             var data = new AgentSubtype
             {
                 AssociatedUnitOverride = agent.AssociatedUnitOverride,
@@ -83,7 +95,8 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
                 OnscreenNameOverride = agent.OnscreenNameOverride,
                 ShowInUi = agent.ShowInUi,
                 SmallIcon = agent.SmallIcon,
-                NodeSet = DataObjects.NodeSets.Where(ns => ns.AgentSubtypeKey == agent.Key).Select(ns => ns.CreateNodeSet()).FirstOrDefault()
+                NodeSet = DataObjects.NodeSets.Where(ns => ns.AgentSubtypeKey == agent.Key).Select(ns => ns.CreateNodeSet()).FirstOrDefault(),
+                Factions = DataObjects.Factions.Where(f => factionKeys.Contains(f.Key)).Select(f => f.CreateFaction()).ToList()
             };
 
             return data;
@@ -193,6 +206,17 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             return data;
         }
 
+        private static Models.Faction CreateFaction(this Models.Serialization.Faction faction)
+        {
+            var data = new Models.Faction
+            {
+                Key = faction.Key,
+                Name = faction.Name
+            };
+
+            return data;
+        }
+
         public static List<AgentSubtype> CreateDataObjects()
         {
             DataObjects.Agents = GetAgentSubTypes();
@@ -203,6 +227,8 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             DataObjects.Nodes = GetSkillNodes();
             DataObjects.NodeLinks = GetSkillNodeLinks();
             DataObjects.NodeSets = GetSkillNodeSets();
+            DataObjects.PermittedSubtypes = GetFactionAgentPermittedSubTypes();
+            DataObjects.Factions = GetFactions();
 
             var data = new List<AgentSubtype>();
 
@@ -233,6 +259,10 @@ namespace TotalWarWarhammerSkillPlannerV2.Data
             public static List<SkillNodeLink> NodeLinks { get; set; }
 
             public static List<SkillNodeSet> NodeSets { get; set; }
+
+            public static List<FactionAgentPermittedSubtypes> PermittedSubtypes { get; set; }
+
+            public static List<Models.Serialization.Faction> Factions { get; set; }
         }
     }
 }

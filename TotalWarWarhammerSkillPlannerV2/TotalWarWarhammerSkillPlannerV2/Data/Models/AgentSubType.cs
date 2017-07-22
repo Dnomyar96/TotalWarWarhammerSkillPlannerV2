@@ -27,5 +27,7 @@ namespace TotalWarWarhammerSkillPlannerV2.Data.Models
         public string SmallIcon { get; set; }
 
         public NodeSet NodeSet { get; set; }
+
+        public List<Faction> Factions { get; set; }
     }
 }
